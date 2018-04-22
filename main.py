@@ -161,3 +161,7 @@ Notes on the genetic parts:
     but this is with replacement. We may have to rewrite that algorithm for our
     own purposes.
 """
+
+if __name__ == '__main__':
+    print(convert_infix(generate(max_depth=10, num_range=[1, 10],
+        odds_branch=0.75, odds_var=0.5)))
