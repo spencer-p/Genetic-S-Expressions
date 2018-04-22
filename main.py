@@ -55,7 +55,14 @@ def _generate_array_literal(num_range):
     """
     Generate a literal array with numbers in num_range
     """
-    return [random.randint(*num_range) for i in range(random.randint(*num_range))]
+    # Correct the range to be valid for arrays
+    size_range = num_range[:]
+    if size_range[0] <= 0:
+        difference = 1-size_range[0]
+        size_range[0] += difference
+        size_range[1] += difference
+
+    return [random.randint(*num_range) for i in range(random.randint(*size_range))]
 
 def generate(*, max_depth, num_range, odds_branch, odds_var):
     """
