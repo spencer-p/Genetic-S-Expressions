@@ -115,6 +115,35 @@ def breed(expr1, expr2, percent_change):
     """
     pass
 
+def convert_infix(expr):
+    """
+    Converts an s expression into infix notation (string).
+    """
+    if type(expr) == str or type(expr) == int:
+        # Int and string (var t) literals first
+        return '('+str(expr)+')'
+
+    elif type(expr) == list:
+        # Lists should always be expressions.
+        # We will handle array literals without recursing.
+
+        op, left, right = expr
+
+        right = convert_infix(right)
+
+        if op == 'i':
+            left = '{'+str(left)[1:-1]+'}'
+            return '(int[]){arr}[({index})%{length}]'.format(
+                    arr=left, index=right, length=len(left))
+        else:
+            left = convert_infix(left)
+            if op == '/' or op == '%':
+                # Stop divide by zeroes
+                right = zero_checker(right)
+            return '({}{}{})'.format(left, op, right)
+
+def zero_checker(expr):
+    return '(({expr})==0?1:{expr})'.format(expr=expr)
 
 """
 Notes on the genetic parts:
