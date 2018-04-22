@@ -25,7 +25,7 @@ that the index is not guarunteed by this package to be in bounds.
 At the leafs, we have literals which are either a variable, an integer, or an
 array.
 """
-EXPRS = ['^', '|', '&', '~', '*', '/', '%', '+', '-', '<<', '>>', 'i']
+EXPRS = ['^', '|', '&', '%', '/', '*', '+', '-', '<<', '>>', 'i']
 VAR = 't'
 
 def serialize(expr):
